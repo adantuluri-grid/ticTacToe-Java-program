@@ -1,131 +1,87 @@
+# Description
+Congratulations, you've almost reached the finish line! In this stage, you'll transform the AI into a formidable opponent by implementing the hard difficulty level.
 
-Description
-In this project, you'll write a game called Tic-Tac-Toe that you can play against your computer. The computer will have three levels of difficulty — easy, medium, and hard.
+Unlike the medium difficultly level, where the AI just looks one move ahead to see an immediate win or prevent an immediate loss, the hard difficulty level uses a more advanced strategy. At hard difficulty level, AI can look two moves ahead, three moves ahead, and even further. That is, it evaluates the entire game tree by simulating all possible moves, looking multiple steps ahead. It can calculate all possible moves that might be played during the game, and choose the best move based on the assumption that its opponent will also play perfectly. So, it doesn't rely on the mistakes of its opponent and plays the game flawlessly from start to finish, regardless of the opponent's skill level!
 
-To begin with, let's write a program that knows how to work with coordinates and determine the state of the game.
-
-The top-left cell will have the coordinates (1, 1) and the bottom-right cell will have the coordinates (3, 3), as shown in this table:
-
-(1, 1) (1, 2) (1, 3)
-(2, 1) (2, 2) (2, 3)
-(3, 1) (3, 2) (3, 3)
-
-The program should ask the user to enter the coordinates of the cell where they want to make a move.
-
-Keep in mind that the first coordinate goes from top to bottom, and the second coordinate goes from left to right. Also, notice that coordinates start with 1 and can be 1, 2, or 3.
-
-But what if the user attempts to enter invalid coordinates? This could happen if they try to:
-
-enter letters or symbols instead of numbers
-enter the coordinates of an already occupied cell
-enter coordinates that are outside the table's range (e.g. ..., -1, 0, 4, 5, 6, ...)
-Your program needs to prevent these things from happening by checking the user's input and catching possible exceptions.
+This advanced decision-making is powered by the minimax algorithm. It's a recursive brute-force algorithm that maximizes the AI's advantage while minimizing the opponent's chances of winning. Minimax is not just for Tic-Tac-Toe. You can use it with any other game where two players make alternate moves, such as chess.
 
 Objectives
-The program should work in the following way:
+In this last stage, you need to:
 
-Ask the user to provide the initial state of the 3x3 table with the first input line. This must include nine symbols that can be X, O or _ (the latter represents an empty cell).
-Output the specified 3x3 table before the user makes a move.
-Request that the user enters the coordinates of the move they wish to make.
-The user then inputs two numbers representing the cell in which they wish to place their X or O. The game always starts with X, so the user's move should be made with this symbol if there are an equal number of X's and O's in the table. If the table contains an extra X, the move should be made with O.
-Analyze the user input and show messages in the following situations:
-• This cell is occupied! Choose another one! — if the cell is already occupied (i.e. not empty);
-• You should enter numbers! — if the user tries to enter letters or symbols instead of numbers;
-• Coordinates should be from 1 to 3! — if the user attempts to enter coordinates outside of the table's range.
-Display the table again, now updated with the user's most recent move.
-After displaying the updated table, output the current state of the game based on the table.
-The possible states are:
+Implement the hard difficulty level using the minimax algorithm.
+Add the hard parameter to enable games against this level.
+Ensure that the AI plays optimally, making it a challenging opponent.
+Like the previous stage, the possible states are:
 
-Game not finished — when no side has three in a row, but the table still has empty cells;
 Draw — when no side has three in a row, and the table is complete;
 X wins — when there are three X's in a row (up, down, across, or diagonally);
 O wins — when there are three O's in a row (up, down, across, or diagonally).
-If the user provides invalid coordinates, the program should repeat the request until valid numbers representing an empty cell on the table are supplied. Ensure that the program outputs the table only twice: once before the move and once after the user makes a valid move.
+Also, ensure that the program handles invalid input gracefully. For example, if the start command is given without valid parameters, display the message Bad parameters!
 
-Examples
-The examples below show how your program should work.
+The minimax algorithm can be conceptually tricky, especially for beginners, as it involves recursion. To help you understand it, here are some recommended resources:
+
+Video-based explanations:
+"Tic Tac Toe AI with Minimax Algorithm" by The Coding Train
+"Algorithms Explained – minimax and alpha-beta pruning" by Sebastian Lague
+"Mega-R3. Games, Minimax, Alpha-Beta" from MIT OpenCourseWare
+Text-based explanations:
+"How to make your Tic Tac Toe game unbeatable by using the minimax algorithm" on freeCodeCamp.org
+"Case Study on Tic-Tac-Toe Part 2: With AI" from Nanyang Technological University
+"Tic Tac Toe - Creating Unbeatable AI" on Medium
+Feel free to explore these or other resources to find the explanation that resonates best with you. Developing this skill of seeking and understanding resources is invaluable as you progress in your software development career.
+
+Example
+The example below shows how your program should work.
 The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.
 
-Example 1:
-
-Enter the cells: > _XXOO_OX_
+Input command: > start hard user
 ---------
-|   X X |
-| O O   |
-| O X   |
----------
-Enter the coordinates: > 3 1
-This cell is occupied! Choose another one!
-Enter the coordinates: > one
-You should enter numbers!
-Enter the coordinates: > one three
-You should enter numbers!
-Enter the coordinates: > 4 1
-Coordinates should be from 1 to 3!
-Enter the coordinates: > 1 1
----------
-| X X X |
-| O O   |
-| O X   |
----------
-X wins
-Example 2:
-
-Enter the cells: > XX_XOXOO_
----------
-| X X   |
-| X O X |
-| O O   |
----------
-Enter the coordinates: > 3 3
----------
-| X X   |
-| X O X |
-| O O O |
----------
-O wins
-Example 3:
-
-Enter the cells: > XX_XOXOO_
----------
-| X X   |
-| X O X |
-| O O   |
----------
-Enter the coordinates: > 1 3
----------
-| X X O |
-| X O X |
-| O O   |
----------
-O wins
-Example 4:
-
-Enter the cells: > OX_XOOOXX
----------
-| O X   |
-| X O O |
-| O X X |
----------
-Enter the coordinates: > 1 3
----------
-| O X X |
-| X O O |
-| O X X |
----------
-Draw
-Example 5:
-
-Enter the cells: >  _XO_OX___
----------
-|   X O |
-|   O X |
+|       |
+|       |
 |       |
 ---------
+Making move level "hard"
+---------
+|       |
+| X     |
+|       |
+---------
+Enter the coordinates: > 2 2
+---------
+|       |
+| X O   |
+|       |
+---------
+Making move level "hard"
+---------
+|   X   |
+| X O   |
+|       |
+---------
+Enter the coordinates: > 3 2
+---------
+|   X   |
+| X O   |
+|   O   |
+---------
+Making move level "hard"
+---------
+| X X   |
+| X O   |
+|   O   |
+---------
 Enter the coordinates: > 3 1
 ---------
-|   X O |
-|   O X |
-| X     |
+| X X   |
+| X O   |
+| O O   |
 ---------
-Game not finished
+Making move level "hard"
+---------
+| X X X |
+| X O   |
+| O O   |
+---------
+X wins
+
+Input command: > exit
