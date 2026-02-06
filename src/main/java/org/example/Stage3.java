@@ -5,7 +5,7 @@ public class Stage3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {  //Menu Loop
+        while (true) {
             System.out.print("Input command: > ");
             String input = scanner.nextLine();
             String[] parts = input.trim().split("\\s+");
